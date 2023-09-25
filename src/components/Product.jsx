@@ -4,7 +4,7 @@ import ProductEntry from "./ProductEntry.jsx";
 import'./productStyle.css'
 
 export default () => {
-    const products = useSelector(state => state.product)
+    const products = useSelector(state => state.products)
     return <table className="table">
         {products.map(product => {
             return <ProductEntry key={product.id} {...product}/>
