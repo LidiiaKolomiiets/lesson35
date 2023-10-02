@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../reducers/reducer.js";
+import { togglePurchase } from "../reducers/reducer.js";
 import isValid from "./isValid.js";
 
 export default () => {
@@ -12,7 +13,8 @@ export default () => {
     const newProd = {
       name: newProduct,
       number: newNumber,
-      id: 'id' + Date.now()
+      id: 'id' + Date.now(),
+      isPurchased: false
     }
     if (isValid(newProd, addProduct(newProd))) {
       dispatch(addProduct(newProd))

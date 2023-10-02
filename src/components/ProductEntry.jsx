@@ -9,8 +9,9 @@ import isValid from "./isValid";
 export default ({ id, name, number }) => {
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
-  const [editedName, setEditedName] = useState(name);
-  const [editedNumber, setEditedNumber] = useState(number);
+const [editedName, setEditedName] = useState(name);
+const [editedNumber, setEditedNumber] = useState(number);
+const [isPurchased, setIsPurchased] = useState(false);
 
   const removeCurrentProduct = () => {
     dispatch(removeProduct({ id }));
@@ -53,20 +54,27 @@ export default ({ id, name, number }) => {
           </tr>
         </>
       ) : (
-        <tr>
-          <td className="table-item">{name}</td>
-          <td className="table-item">{number}</td>
-          <td className="table-item">
-            <button onClick={() => setIsEditing(true)}>
-              <img className="edit-icon" src={editIcon} alt="Edit" />
-            </button>
-          </td>
-          <td className="table-item">
-            <button onClick={removeCurrentProduct}>
-              <img className="delete-icon" src={deleteIcon} alt="Delete" />
-            </button>
-          </td>
-        </tr>
+          <tr>
+            <td className={`table-item ${isPurchased ? 'purchased' : ''}`}>{name}</td>
+            <td className={`table-item ${isPurchased ? 'purchased' : ''}`}>{number}</td>
+            <td className="table-item">
+              <button onClick={() => setIsEditing(true)}>
+                <img className="edit-icon" src={editIcon} alt="Edit" />
+              </button>
+            </td>
+            <td className="table-item">
+              <button onClick={removeCurrentProduct}>
+                <img className="delete-icon" src={deleteIcon} alt="Delete" />
+              </button>
+            </td>
+            <td className="table-item">
+              <input
+                type="checkbox"
+                checked={isPurchased}
+                onChange={() => setIsPurchased(!isPurchased)}
+              />
+            </td>
+          </tr>
       )}
     </tbody>
   );
